@@ -17,3 +17,6 @@ class Potion:
     def bad_hash(cls, potion_name: str, tablesize: int) -> int:
         """"""
         raise NotImplementedError()
+
+
+    # Testing
