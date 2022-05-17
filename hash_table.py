@@ -10,6 +10,8 @@ __since__ = '14/05/2020'
 
 from referential_array import ArrayR
 from typing import TypeVar, Generic
+from primes import largest_prime
+from potion import Potion
 T = TypeVar('T')
 
 
@@ -30,11 +32,25 @@ class LinearProbePotionTable(Generic[T]):
         self.conflict_count = 0
         self.probe_max = 0
         self.probe_total = 0
-        raise NotImplementedError()
+        if tablesize_override == -1:
+            self.tablesize = largest_prime(3 * max_potions)
+        else:
+            self.tablesize = tablesize_override
+        self.initalise_with_tablesize(self.tablesize)
+        self.good_hash = good_hash
 
     def hash(self, potion_name: str) -> int:
-        """"""
-        raise NotImplementedError()
+        """
+        Hashes a potion name using either good_hash or bad_hash
+        :param potion_name: Name of potion to be hashed
+        :complexity best:
+        :complexity worst:
+        """
+        if self.good_hash:
+            Potion.good_hash(potion_name, self.tablesize)
+        else:
+            Potion.bad_hash(potion_name, self.tablesize)
+
 
     def statistics(self) -> tuple:
         """"""
