@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="Testing">
+    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="Prime Number">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/primes.py" beforeDir="false" afterPath="$PROJECT_DIR$/primes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/potion.py" beforeDir="false" afterPath="$PROJECT_DIR$/potion.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +59,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652688030502</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Prime Number">
+      <created>1652691423808</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652691423808</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -75,6 +82,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing" />
+    <MESSAGE value="Prime Number" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prime Number" />
   </component>
 </project>
