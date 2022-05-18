@@ -16,7 +16,7 @@ class Potion:
     def good_hash(cls, potion_name: str, tablesize: int) -> int:
         value = 0
         a = 31415
-        b = 27183
+        b = 27179
         for char in potion_name:
             value = (ord(char) + a * value) % tablesize
             a = a * b % (tablesize - 1)
@@ -25,11 +25,7 @@ class Potion:
 
     @classmethod
     def bad_hash(cls, potion_name: str, tablesize: int) -> int:
-        total = 0
-        for char in potion_name:
-            total += ord(char)
-        position = total % tablesize
-        return position
+        return ord(potion_name[0])
 
 
 

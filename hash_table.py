@@ -47,9 +47,9 @@ class LinearProbePotionTable(Generic[T]):
         :complexity worst:
         """
         if self.good_hash:
-            Potion.good_hash(potion_name, self.tablesize)
+            return Potion.good_hash(potion_name, self.tablesize)
         else:
-            Potion.bad_hash(potion_name, self.tablesize)
+            return Potion.bad_hash(potion_name, self.tablesize)
 
 
     def statistics(self) -> tuple:
