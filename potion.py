@@ -15,7 +15,7 @@ class Potion:
     @classmethod
     def good_hash(cls, potion_name: str, tablesize: int) -> int:
         value = 0
-        a = 31415
+        a = 31397
         b = 27179
         for char in potion_name:
             value = (ord(char) + a * value) % tablesize
