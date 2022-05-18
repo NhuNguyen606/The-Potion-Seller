@@ -25,7 +25,7 @@ class Potion:
 
     @classmethod
     def bad_hash(cls, potion_name: str, tablesize: int) -> int:
-        return ord(potion_name[0])
+        return ord(potion_name[0]) % tablesize
 
 
 

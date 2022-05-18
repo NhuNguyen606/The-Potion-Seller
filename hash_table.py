@@ -54,7 +54,7 @@ class LinearProbePotionTable(Generic[T]):
 
     def statistics(self) -> tuple:
         """"""
-        raise NotImplementedError()
+        return self.conflict_count, self.probe_total, self.probe_max
 
     def __len__(self) -> int:
         """
@@ -74,18 +74,33 @@ class LinearProbePotionTable(Generic[T]):
         """
         position = self.hash(key)  # get the position using hash
 
+        conflict = False
+        probes = 0
+
         if is_insert and self.is_full():
             raise KeyError(key)
 
         for _ in range(len(self.table)):  # start traversing
             if self.table[position] is None:  # found empty slot
                 if is_insert:
+                    if conflict:
+                        self.conflict_count += 1
+                        if probes > self.probe_max:
+                            self.probe_max = probes
+                        self.probe_total += probes
                     return position
                 else:
                     raise KeyError(key)  # so the key is not in
             elif self.table[position][0] == key:  # found key
+                if conflict and is_insert:
+                    self.conflict_count += 1
+                    if probes > self.probe_max:
+                        self.probe_max = probes
+                    self.probe_total += probes
                 return position
             else:  # there is something but not the key, try next
+                conflict = True
+                probes += 1
                 position = (position + 1) % len(self.table)
 
         raise KeyError(key)
@@ -165,3 +180,11 @@ class LinearProbePotionTable(Generic[T]):
                 (key, value) = item
                 result += "(" + str(key) + "," + str(value) + ")\n"
         return result
+
+
+if __name__ == '__main__':
+    hash_names = ["healing", "health", "strength", "damage", "odour", "stamina", "speed", "armour", "behnam", "tiger", "sleeping"]
+    test_table = LinearProbePotionTable(11, False)
+    for i in hash_names:
+        test_table.insert(i, i)
+    print(test_table.statistics())
