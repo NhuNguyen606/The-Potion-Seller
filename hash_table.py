@@ -185,6 +185,27 @@ class LinearProbePotionTable(Generic[T]):
 if __name__ == '__main__':
     hash_names = ["healing", "health", "strength", "damage", "odour", "stamina", "speed", "armour", "behnam", "tiger", "sleeping"]
     test_table = LinearProbePotionTable(11, False)
+    test_table_good = LinearProbePotionTable(11)
     for i in hash_names:
         test_table.insert(i, i)
+        test_table_good.insert(i, i)
+    print(test_table_good.statistics())
     print(test_table.statistics())
+
+    dataset = ["Italy", "Israel", "Australia", "Auckland", "America", "Argentina", "Iceland", "India", "Ireland", "Indonesia"]
+    dataset_table_good = LinearProbePotionTable(len(dataset))
+    dataset_table_bad = LinearProbePotionTable(len(dataset), False)
+    for data in dataset:
+        dataset_table_good.insert(data, data)
+        dataset_table_bad.insert(data, data)
+    print(dataset_table_good.statistics())
+    print(dataset_table_bad.statistics())
+
+    cities = ["Mumbai", "Melbourne", "Mexico City", "Moscow", "Madrid", "Mogadishu", "Mashhad", "Maracaibo", "Medellin", "Maracay", "Medan"]
+    cities_good_hash = LinearProbePotionTable(len(cities))
+    cities_bad_hash = LinearProbePotionTable(len(cities), False)
+    for city in cities:
+        cities_good_hash.insert(city, city)
+        cities_bad_hash.insert(city, city)
+    print(cities_good_hash.statistics())
+    print(cities_bad_hash.statistics())
