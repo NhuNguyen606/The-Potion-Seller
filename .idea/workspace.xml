@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="hash method">
+    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="Jackson modification">
+      <change beforePath="$PROJECT_DIR$/.idea/base.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/base.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hash_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/hash_table.py" afterDir="false" />
     </list>
@@ -179,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652845993286</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Jackson modification">
+      <created>1653026991412</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1653026991412</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,12 +211,7 @@
     <MESSAGE value="good hash and bad hash" />
     <MESSAGE value="hash method" />
     <MESSAGE value="updated code" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated code" />
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$primes.coverage" NAME="primes Coverage Results" MODIFIED="1652845912141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1652843333804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$test_primes.coverage" NAME="test_primes Coverage Results" MODIFIED="1652593740739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$hash_table.coverage" NAME="hash_table Coverage Results" MODIFIED="1652951575047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <MESSAGE value="Jackson modification" />
+    <option name="LAST_COMMIT_MESSAGE" value="Jackson modification" />
   </component>
 </project>

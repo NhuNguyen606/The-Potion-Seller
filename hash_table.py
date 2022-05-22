@@ -27,7 +27,7 @@ class LinearProbePotionTable(Generic[T]):
         table_size: current size of the hash table
     """
 
-    def __init__(self, max_potions: int, good_hash: bool=True, tablesize_override: int=-1) -> None:
+    def __init__(self, max_potions: int, good_hash: bool = True, tablesize_override: int = -1) -> None:
         # Statistic setting
         self.conflict_count = 0
         self.probe_max = 0
@@ -128,7 +128,7 @@ class LinearProbePotionTable(Generic[T]):
 
     def __setitem__(self, key: str, data: T) -> None:
         """
-        Set an (key, data) pair in our hash table
+        Set a (key, data) pair in our hash table
         :see: #self.__linear_probe(key: str, is_insert: bool)
         :see: #self.__contains__(key: str)
         """
