@@ -63,8 +63,12 @@ class BinarySearchTree(Generic[K, I]):
             :complexity: O(1)
         """
 
+        self.minimum = None
         self.root = None
         self.length = 0
+
+        self.left = None
+        self.right = None
 
     def is_empty(self) -> bool:
         """
@@ -188,13 +192,19 @@ class BinarySearchTree(Generic[K, I]):
             It should be a child node having the smallest key among all the
             larger keys.
         """
-        raise NotImplementedError()
+        if current.right is not None:
+            return self.get_minimal(self, current.right)
+        return None
+
 
     def get_minimal(self, current: TreeNode) -> TreeNode:
         """
             Get a node having the smallest key in the current sub-tree.
         """
-        raise NotImplementedError()
+        while current.left is not None:
+            current = current.left
+        return self.current
+
 
     def is_leaf(self, current: TreeNode) -> bool:
         """ Simple check whether or not the node is a leaf. """
