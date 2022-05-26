@@ -4,7 +4,7 @@ __author__ = 'Alexey Ignatiev modified by Zhongxun Pan'
 __docformat__ = 'reStructuredText'
 __modified__ = '26/05/2022'
 
-from bst import BinarySearchTree
+from bst import BinarySearchTree, TreeNode
 from typing import TypeVar, Generic
 from node import AVLTreeNode
 
@@ -24,6 +24,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         """
 
         BinarySearchTree.__init__(self)
+
 
     def get_height(self, current: AVLTreeNode) -> int:
         """
@@ -55,7 +56,18 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             returns the new root of the subtree.
         """
 
-        raise NotImplementedError()
+        if current is None:  # base case: at the leaf
+            current = TreeNode(key, item)
+            self.length += 1
+        elif key < current.key:
+            current.left = self.insert_aux(current.left, key, item)
+            self.rebalance(current)
+        elif key > current.key:
+            current.right = self.insert_aux(current.right, key, item)
+            self.rebalance(current)
+        else:  # key == current.key
+            raise ValueError('Inserting duplicate item')
+        return current
 
     def delete_aux(self, current: AVLTreeNode, key: K) -> AVLTreeNode:
         """
@@ -65,7 +77,32 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             returns the new root of the subtree.
         """
 
-        raise NotImplementedError()
+        if current is None:  # key not found
+            raise ValueError('Deleting non-existent item')
+        elif key < current.key:
+            current.left = self.delete_aux(current.left, key)
+            self.rebalance(current)
+        elif key > current.key:
+            current.right = self.delete_aux(current.right, key)
+            self.rebalance(current)
+        else:  # we found our key => do actual deletion
+            if self.is_leaf(current):
+                self.length -= 1
+                return None
+            elif current.left is None:
+                self.length -= 1
+                return current.right
+            elif current.right is None:
+                self.length -= 1
+                return current.left
+
+            # general case => find a successor
+            succ = self.get_successor(current)
+            current.key = succ.key
+            current.item = succ.item
+            current.right = self.delete_aux(current.right, succ.key)
+
+        return current
 
     def left_rotate(self, current: AVLTreeNode) -> AVLTreeNode:
         """
@@ -159,4 +196,26 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         Returns the kth largest element in the tree.
         k=1 would return the largest.
         """
-        raise NotImplementedError()
+
+        count = 0
+        return self.kth_largest_aux(self.root, k, count)
+
+    def kth_largest_aux(self, root: AVLTreeNode, k: int, count: int) -> AVLTreeNode:
+        """
+        Finds the kth largest element using reverse inorder traversal
+        :param root: current root
+        :param k: Kth largest element to find
+        :param count: number of Nodes traversed
+        """
+        # Base case -> root is None
+        if root is not None:
+            # traverse right subtree
+            self.kth_largest_aux(root.right, k, count)
+            # increment count, check if kth largest has been found
+            count += 1
+            if count == k:
+                return root.key
+            # traverse left subtree
+            self.kth_largest_aux(root.left, k, count)
+
+

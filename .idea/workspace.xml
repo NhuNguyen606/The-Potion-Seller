@@ -102,8 +102,8 @@
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python.primes" />
       <item itemvalue="Python.hash_table" />
+      <item itemvalue="Python.primes" />
     </list>
     <recent_temporary>
       <list>
