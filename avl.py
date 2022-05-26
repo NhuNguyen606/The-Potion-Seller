@@ -1,7 +1,8 @@
 """ AVL Tree implemented on top of the standard BST. """
 
-__author__ = 'Alexey Ignatiev'
+__author__ = 'Alexey Ignatiev modified by Zhongxun Pan'
 __docformat__ = 'reStructuredText'
+__modified__ = '26/05/2022'
 
 from bst import BinarySearchTree
 from typing import TypeVar, Generic
@@ -83,7 +84,20 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             :complexity: O(1)
         """
 
-        raise NotImplementedError()
+        nodeRight = current.right
+        # left node of nodeRight
+        nodeLeft = nodeRight.left
+
+        # Rotation
+        nodeLeft = current
+        current.right = nodeLeft
+
+        # reform the branch
+        current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+        nodeLeft.height = 1 + max(self.get_height(nodeLeft.left), self.get_height(nodeLeft.right))
+
+        return nodeLeft
+
 
     def right_rotate(self, current: AVLTreeNode) -> AVLTreeNode:
         """
@@ -102,7 +116,37 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             :complexity: O(1)
         """
 
-        raise NotImplementedError()
+        """
+        y = z.left
+        T3 = y.right
+ 
+        # Perform rotation
+        y.right = z
+        z.left = T3
+ 
+        # Update heights
+        z.height = 1 + max(self.getHeight(z.left),
+                        self.getHeight(z.right))
+        y.height = 1 + max(self.getHeight(y.left),
+                        self.getHeight(y.right))
+ 
+        # Return the new root
+        return y
+        """
+
+        nodeLeft = current.left
+        # right node of nodeLeft
+        nodeRight = nodeLeft.right
+
+        # Rotation
+        nodeLeft.right = current
+        current.left = nodeRight
+
+        # reform the branch
+        current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+        nodeLeft.height = 1 + max(self.get_height(nodeLeft.left), self.get_height(nodeLeft.right))
+
+        return nodeLeft
 
     def rebalance(self, current: AVLTreeNode) -> AVLTreeNode:
         """ Compute the balance of the current node.
