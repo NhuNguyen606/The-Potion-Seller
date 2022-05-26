@@ -25,7 +25,6 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
 
         BinarySearchTree.__init__(self)
 
-
     def get_height(self, current: AVLTreeNode) -> int:
         """
             Get the height of a node. Return current.height if current is 
@@ -35,6 +34,17 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
 
         if current is not None:
             return current.height
+        return 0
+
+    def get_sub_length(self, current: AVLTreeNode) -> int:
+        """
+        Get the length of the subtree with current as its root
+        :param current: root of subtree
+        :complexity: O(1)
+        """
+
+        if current is not None:
+            return current.sub_length
         return 0
 
     def get_balance(self, current: AVLTreeNode) -> int:
@@ -57,16 +67,25 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         """
 
         if current is None:  # base case: at the leaf
-            current = TreeNode(key, item)
+            current = AVLTreeNode(key, item)
             self.length += 1
         elif key < current.key:
             current.left = self.insert_aux(current.left, key, item)
-            self.rebalance(current)
+            # update height and rebalance current.left
+            current.left = self.rebalance(current.left)
+            current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+            current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
         elif key > current.key:
             current.right = self.insert_aux(current.right, key, item)
-            self.rebalance(current)
+            # update height and rebalance current.right
+            current.right = self.rebalance(current.right)
+            current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+            current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
         else:  # key == current.key
             raise ValueError('Inserting duplicate item')
+        # rebalance root
+        if self.root is not None and current.key == self.root.key:
+            self.root = self.rebalance(current)
         return current
 
     def delete_aux(self, current: AVLTreeNode, key: K) -> AVLTreeNode:
@@ -81,10 +100,16 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             raise ValueError('Deleting non-existent item')
         elif key < current.key:
             current.left = self.delete_aux(current.left, key)
-            self.rebalance(current)
+            # decrement height and rebalance current.left
+            current.left = self.rebalance(current.left)
+            current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+            current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
         elif key > current.key:
             current.right = self.delete_aux(current.right, key)
-            self.rebalance(current)
+            # decrement height and rebalance current.right
+            current.right = self.rebalance(current.right)
+            current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+            current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
         else:  # we found our key => do actual deletion
             if self.is_leaf(current):
                 self.length -= 1
@@ -101,7 +126,13 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             current.key = succ.key
             current.item = succ.item
             current.right = self.delete_aux(current.right, succ.key)
-
+            current.right = self.rebalance(current.right)
+            current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
+            current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
+        # rebalance root
+        if self.root is not None and current.key == self.root.key:
+            self.root = self.rebalance(current)
+            return self.root
         return current
 
     def left_rotate(self, current: AVLTreeNode) -> AVLTreeNode:
@@ -121,20 +152,21 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             :complexity: O(1)
         """
 
-        nodeRight = current.right
-        # left node of nodeRight
-        nodeLeft = nodeRight.left
+        child = current.right
+        # left node of child
+        center = child.left
 
         # Rotation
-        nodeLeft = current
-        current.right = nodeLeft
+        child.left = current
+        current.right = center
 
-        # reform the branch
-        current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
-        nodeLeft.height = 1 + max(self.get_height(nodeLeft.left), self.get_height(nodeLeft.right))
+        # update height
+        current.height = 1 + max(self.get_height(center), self.get_height(current.left))
+        child.height = 1 + max(self.get_height(current), self.get_height(child.right))
+        current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
+        child.sub_length = 1 + self.get_sub_length(child.left) + self.get_sub_length(child.right)
 
-        return nodeLeft
-
+        return child
 
     def right_rotate(self, current: AVLTreeNode) -> AVLTreeNode:
         """
@@ -153,19 +185,21 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             :complexity: O(1)
         """
 
-        nodeLeft = current.left
-        # right node of nodeLeft
-        nodeRight = nodeLeft.right
+        child = current.left
+        # left node of child
+        center = child.right
 
         # Rotation
-        nodeLeft.right = current
-        current.left = nodeRight
+        child.right = current
+        current.left = center
 
-        # reform the branch
-        current.height = 1 + max(self.get_height(current.left), self.get_height(current.right))
-        nodeLeft.height = 1 + max(self.get_height(nodeLeft.left), self.get_height(nodeLeft.right))
+        # update height
+        current.height = 1 + max(self.get_height(center), self.get_height(current.right))
+        child.height = 1 + max(self.get_height(current), self.get_height(child.left))
+        current.sub_length = 1 + self.get_sub_length(current.left) + self.get_sub_length(current.right)
+        child.sub_length = 1 + self.get_sub_length(child.left) + self.get_sub_length(child.right)
 
-        return nodeLeft
+        return child
 
     def rebalance(self, current: AVLTreeNode) -> AVLTreeNode:
         """ Compute the balance of the current node.
@@ -197,25 +231,21 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         k=1 would return the largest.
         """
 
-        count = 0
-        return self.kth_largest_aux(self.root, k, count)
+        return self.kth_largest_aux(self.root, k)
 
-    def kth_largest_aux(self, root: AVLTreeNode, k: int, count: int) -> AVLTreeNode:
+    def kth_largest_aux(self, current: AVLTreeNode, k: int) -> AVLTreeNode:
         """
-        Finds the kth largest element using reverse inorder traversal
-        :param root: current root
+        Finds the kth largest element
+        :param current: current node
         :param k: Kth largest element to find
-        :param count: number of Nodes traversed
         """
-        # Base case -> root is None
-        if root is not None:
-            # traverse right subtree
-            self.kth_largest_aux(root.right, k, count)
-            # increment count, check if kth largest has been found
-            count += 1
-            if count == k:
-                return root.key
-            # traverse left subtree
-            self.kth_largest_aux(root.left, k, count)
-
-
+        right_length = self.get_sub_length(current.right)
+        # Search right of tree if >= k nodes in right of tree
+        if right_length >= k:
+            return self.kth_largest_aux(current.right, k)
+        # Search left of tree if < k - 1 nodes in right of tree
+        elif right_length < k - 1:
+            return self.kth_largest_aux(current.left, k - right_length - 1)
+        # base case: current is the kth largest
+        else:
+            return current

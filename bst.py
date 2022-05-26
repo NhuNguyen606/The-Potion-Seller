@@ -193,7 +193,7 @@ class BinarySearchTree(Generic[K, I]):
             larger keys.
         """
         if current.right is not None:
-            return self.get_minimal(self, current.right)
+            return self.get_minimal(current.right)
         return None
 
 
@@ -203,7 +203,7 @@ class BinarySearchTree(Generic[K, I]):
         """
         while current.left is not None:
             current = current.left
-        return self.current
+        return current
 
 
     def is_leaf(self, current: TreeNode) -> bool:

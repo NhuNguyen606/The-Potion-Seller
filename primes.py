@@ -7,7 +7,3 @@ def largest_prime(k: int) -> int:
                 prime = False
         if prime:
             return x
-
-
-if __name__ == '__main__':
-    print(largest_prime(16))
