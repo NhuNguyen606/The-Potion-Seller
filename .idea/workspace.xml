@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="Fake Dataset.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="added left rotation and right rotation to avl.py file.">
       <change beforePath="$PROJECT_DIR$/avl.py" beforeDir="false" afterPath="$PROJECT_DIR$/avl.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -122,7 +121,7 @@
       <option name="presentableId" value="Default" />
       <updated>1652575052156</updated>
       <workItem from="1652951553434" duration="1749000" />
-      <workItem from="1653527940015" duration="408000" />
+      <workItem from="1653527940015" duration="482000" />
     </task>
     <task id="LOCAL-00001" summary="Testing">
       <created>1652575513599</created>
@@ -180,7 +179,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652845993286</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="added left rotation and right rotation to avl.py file.">
+      <created>1653528367049</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1653528367049</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,7 +209,8 @@
     <MESSAGE value="good hash and bad hash" />
     <MESSAGE value="hash method" />
     <MESSAGE value="updated code" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated code" />
+    <MESSAGE value="added left rotation and right rotation to avl.py file." />
+    <option name="LAST_COMMIT_MESSAGE" value="added left rotation and right rotation to avl.py file." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/The_Potion_Seller$primes.coverage" NAME="primes Coverage Results" MODIFIED="1652845912141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

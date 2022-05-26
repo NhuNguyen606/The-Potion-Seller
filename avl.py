@@ -116,24 +116,6 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             :complexity: O(1)
         """
 
-        """
-        y = z.left
-        T3 = y.right
- 
-        # Perform rotation
-        y.right = z
-        z.left = T3
- 
-        # Update heights
-        z.height = 1 + max(self.getHeight(z.left),
-                        self.getHeight(z.right))
-        y.height = 1 + max(self.getHeight(y.left),
-                        self.getHeight(y.right))
- 
-        # Return the new root
-        return y
-        """
-
         nodeLeft = current.left
         # right node of nodeLeft
         nodeRight = nodeLeft.right
