@@ -7,7 +7,9 @@ from random_gen import RandomGen
 
 
 class Game:
+    """
 
+    """
     def __init__(self, seed=0) -> None:
         self.rand = RandomGen(seed=seed)
         self.total_potions = None
@@ -31,10 +33,12 @@ class Game:
         """
         Adds litres of particular potions into the inventory of vendors
         Args:
-            potion_name_amount_pairs: list of tuples containing two elements: The name of the potion, and amount in litres to add
-             to the inventory.
-        :complexity: O(C*log(N)), where C is the length of potion_name_amount_pairs, and N is the number of potions in
-        self.total_potions
+            potion_name_amount_pairs: list of tuples containing two elements: The name of the potion, and amount in
+            litres to add to the inventory.
+        :complexity: worst case: O(C*log(N)), where C is the length of potion_name_amount_pairs, and N is the number of
+        potions in self.total_potions. This is because the method has a loop which iterates over each element in
+        potion_name_amount_pairs and in the loop, each element is inserted into the AVL tree, which takes O(log(N)) time
+        thus resulting in a complexity of O(C*log(N)) time.
         """
         self.inventory = AVLTree()
         for i in potion_name_amount_pairs:
@@ -46,8 +50,10 @@ class Game:
         Completes the vendor potion selection process
         Args:
             num_vendors: number of vendors who will sell potions
-        :complexity: O(C*log(N)), where C is equal to num_vendors, and N is the number of potions in
-        self.total_potions
+        :complexity: worst case: O(C*log(N)), where C is equal to num_vendors, and N is the number of potions in
+        self.inventory. This is because the method contains a loop which iterates C times, where C is the
+        num_vendors and within the loop calls the kth_largest function, which has a complexity of O(log(N)), where N is
+        the number of potions in the AVL tree.
         """
         output = []
         prices = []

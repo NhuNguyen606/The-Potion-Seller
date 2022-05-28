@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="finished choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data">
+    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/avl.py" beforeDir="false" afterPath="$PROJECT_DIR$/avl.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -162,7 +161,7 @@
       <updated>1652575052156</updated>
       <workItem from="1652951553434" duration="1749000" />
       <workItem from="1653527940015" duration="482000" />
-      <workItem from="1653613126225" duration="11869000" />
+      <workItem from="1653613126225" duration="12929000" />
     </task>
     <task id="LOCAL-00001" summary="Testing">
       <created>1652575513599</created>
@@ -269,7 +268,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653711960689</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data">
+      <created>1653715922325</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1653715922325</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,7 +303,8 @@
     <MESSAGE value="finished all avl section" />
     <MESSAGE value="added analysis" />
     <MESSAGE value="finished choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
+    <MESSAGE value="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
