@@ -86,6 +86,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         # rebalance root
         if self.root is not None and current.key == self.root.key:
             self.root = self.rebalance(current)
+            return self.root
         return current
 
     def delete_aux(self, current: AVLTreeNode, key: K) -> AVLTreeNode:
@@ -229,8 +230,13 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         """
         Returns the kth largest element in the tree.
         k=1 would return the largest.
+        :complexity: worst case: O(log(N)), where N is the total number of nodes in the tree
+        :raises ValueError: if k is > number of nodes or if k < 1
         """
-
+        if k > len(self):
+            raise ValueError("k must be <= Number of nodes in tree")
+        elif k < 1:
+            raise ValueError("k must be > 1")
         return self.kth_largest_aux(self.root, k)
 
     def kth_largest_aux(self, current: AVLTreeNode, k: int) -> AVLTreeNode:
@@ -238,6 +244,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         Finds the kth largest element
         :param current: current node
         :param k: Kth largest element to find
+        :complexity: worst case: O(log(N)), where N is the total number of nodes in the tree
         """
         right_length = self.get_sub_length(current.right)
         # Search right of tree if >= k nodes in right of tree

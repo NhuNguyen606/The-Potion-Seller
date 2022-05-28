@@ -36,8 +36,9 @@ class Game:
         :complexity: O(C*log(N)), where C is the length of potion_name_amount_pairs, and N is the number of potions in
         self.total_potions
         """
+        self.inventory = AVLTree()
         for i in potion_name_amount_pairs:
-            price = self.total_potions[i[0]][2]
+            price = self.total_potions[i[0]][1]
             self.inventory[price] = (i[0], i[1])
 
     def choose_potions_for_vendors(self, num_vendors: int) -> list:
