@@ -43,8 +43,8 @@ class LinearProbePotionTable(Generic[T]):
         """
         Hashes a potion name using either good_hash or bad_hash
         :param potion_name: Name of potion to be hashed
-        :complexity best:
-        :complexity worst:
+        :complexity best: O(1)
+        :complexity worst: O(n)
         """
         if self.good_hash:
             return Potion.good_hash(potion_name, self.tablesize)
@@ -53,7 +53,9 @@ class LinearProbePotionTable(Generic[T]):
 
 
     def statistics(self) -> tuple:
-        """"""
+        """
+        Return the statistics of potion table: conflict_count, probe_total and probe_max
+        """
         return self.conflict_count, self.probe_total, self.probe_max
 
     def __len__(self) -> int:

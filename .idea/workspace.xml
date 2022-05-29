@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data">
+    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="edit set_total_potion_data and add_potions_to_inventory">
+      <change beforePath="$PROJECT_DIR$/.idea/base.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/base.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hash_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/hash_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/potion.py" beforeDir="false" afterPath="$PROJECT_DIR$/potion.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/primes.py" beforeDir="false" afterPath="$PROJECT_DIR$/primes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,8 +139,8 @@
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_kth" />
       <item itemvalue="Python tests.Python tests for test_avl.TestAVL" />
+      <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_kth" />
       <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_run_through" />
       <item itemvalue="Python tests.Python tests for test_game.TestGame.test_choose_vendors" />
       <item itemvalue="Python tests.Python tests for test_game.TestGame.test_example" />
@@ -323,14 +327,5 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$primes.coverage" NAME="primes Coverage Results" MODIFIED="1652845912141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1652843333804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/A3___The_Potion_Seller$hash_table.coverage" NAME="hash_table Coverage Results" MODIFIED="1653457635172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$random_gen.coverage" NAME="random_gen Coverage Results" MODIFIED="1653711792759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$test_primes.coverage" NAME="test_primes Coverage Results" MODIFIED="1652593740739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/The_Potion_Seller$hash_table.coverage" NAME="hash_table Coverage Results" MODIFIED="1652951575047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/A3___The_Potion_Seller$.coverage" NAME=" Coverage Results" MODIFIED="1653822932937" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
