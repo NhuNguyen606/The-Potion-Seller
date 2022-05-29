@@ -228,6 +228,7 @@ class BinarySearchTree(Generic[K, I]):
 
         return current
 
+
     def get_successor(self, current: TreeNode) -> TreeNode:
         """
             Get successor of the current node.
