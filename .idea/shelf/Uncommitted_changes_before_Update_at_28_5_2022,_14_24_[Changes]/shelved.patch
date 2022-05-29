@@ -1,0 +1,344 @@
+Index: random_gen.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>from typing import Generator\n\ndef lcg(modulus: int, a: int, c: int, seed: int) -> Generator[int, None, None]:\n    \"\"\"Linear congruential generator.\"\"\"\n    while True:\n        seed = (a * seed + c) % modulus\n        yield seed\n\nclass RandomGen:\n    \n    def __init__(self) -> None:\n        raise NotImplementedError()\n\n    def randint(self, k: int) -> int:\n        raise NotImplementedError()\n\nif __name__ == \"__main__\":\n    Random_gen = lcg(pow(2,32), 134775813, 1, 0)\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/random_gen.py b/random_gen.py
+--- a/random_gen.py	(revision 1c906f14384830e21111f3a46065cbbadc143d98)
++++ b/random_gen.py	(date 1653711715896)
+@@ -1,4 +1,5 @@
+ from typing import Generator
++from random import randrange
+ 
+ def lcg(modulus: int, a: int, c: int, seed: int) -> Generator[int, None, None]:
+     """Linear congruential generator."""
+@@ -6,13 +7,65 @@
+         seed = (a * seed + c) % modulus
+         yield seed
+ 
++
+ class RandomGen:
+-    
+-    def __init__(self) -> None:
+-        raise NotImplementedError()
++
++    def __init__(self, seed: int = 0) -> None:
++        self.modulus = pow(randrange(10), randrange(50))
++        self.a = 134775813
++        self.c = 1
++        self.seed = seed
+ 
+     def randint(self, k: int) -> int:
+-        raise NotImplementedError()
++        random_generator = lcg(self.modulus, self.a, self.c, self.seed)
++        count = 0
++        temp_list = []
++        for number in random_generator:
++            temp_list.append(format(number, "b")[0:16])
++            count += 1
++            if count >= 6:
++                break
++        temp_list.pop(0)
++        res = 0
++        for _ in temp_list:
++            res += int(_)
++        output = ""
++        for _ in str(res):
++            if int(_) >= 3:
++                output += "1"
++            else:
++                output += "0"
++        final_generated_random_number = int(output, 2)
++        return final_generated_random_number % k + 1
+ 
+ if __name__ == "__main__":
+-    Random_gen = lcg(pow(2,32), 134775813, 1, 0)
++    random_set = RandomGen(seed=0)
++    res = random_set.randint(12)
++    print(res)
++    # Random_gen = lcg(pow(2, 32), 134775813, 1, 0)
++    # print(Random_gen)
++    # count = 0
++    # five_random_number = []
++    # for random_number in Random_gen:
++    #     five_random_number.append(format(random_number, "b")[0:16])
++    #     count += 1
++    #     if count >= 6:
++    #         break
++    # five_random_number.pop(0)
++    # #################################
++    #
++    # print(five_random_number)
++    #
++    # res = 0
++    # for _ in five_random_number:
++    #     res += int(_)
++    # print(res)
++    # output = ""
++    # for _ in str(res):
++    #     if int(_) >= 3:
++    #         output += "1"
++    #     else:
++    #         output += "0"
++    # print(output)
++    # final_generated_random_number = int(output, 2)
++    # print(final_generated_random_number % 74 + 1)
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"c9235d66-4685-4555-8942-3ddc664d8a52\" name=\"Changes\" comment=\"set_total_potion_data and add_potions_to_inventory\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/game.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/game.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"29B8Jyypd68L2ZlfIXrXhgfNIFm\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <OptionsSetting value=\"false\" id=\"Update\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"node.js.detected.package.eslint\" value=\"true\" />\n    <property name=\"node.js.detected.package.tslint\" value=\"true\" />\n    <property name=\"node.js.selected.package.eslint\" value=\"(autodetect)\" />\n    <property name=\"node.js.selected.package.tslint\" value=\"(autodetect)\" />\n  </component>\n  <component name=\"RunManager\" selected=\"Python tests.Python tests in test_avl.py\">\n    <configuration name=\"Unnamed\" type=\"PythonConfigurationType\" factoryName=\"Python\" nameIsGenerated=\"true\">\n      <module name=\"base\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <envs>\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\n      </envs>\n      <option name=\"SDK_HOME\" value=\"$USER_HOME$/opt/anaconda3/bin/python\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"SCRIPT_NAME\" value=\"\" />\n      <option name=\"PARAMETERS\" value=\"\" />\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\n      <option name=\"MODULE_MODE\" value=\"false\" />\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\n      <option name=\"INPUT_FILE\" value=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Python tests for test_avl.TestAVL\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"base\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;test_avl.TestAVL&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PYTHON&quot;\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Python tests for test_avl.TestAVL.test_kth\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"base\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;test_avl.TestAVL.test_kth&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PYTHON&quot;\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Python tests for test_avl.TestAVL.test_run_through\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"base\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;test_avl.TestAVL.test_run_through&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PYTHON&quot;\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Python tests for test_bst.TestBST\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"base\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;test_bst.TestBST&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PYTHON&quot;\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Python tests in test_avl.py\" type=\"tests\" factoryName=\"Autodetect\" temporary=\"true\" nameIsGenerated=\"true\">\n      <module name=\"base\" />\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\n      <option name=\"PARENT_ENVS\" value=\"true\" />\n      <option name=\"SDK_HOME\" value=\"\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n      <option name=\"IS_MODULE_SDK\" value=\"true\" />\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\n      <option name=\"_new_target\" value=\"&quot;$PROJECT_DIR$/test_avl.py&quot;\" />\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\n      <method v=\"2\" />\n    </configuration>\n    <list>\n      <item itemvalue=\"Python.Unnamed\" />\n      <item itemvalue=\"Python tests.Python tests in test_avl.py\" />\n      <item itemvalue=\"Python tests.Python tests for test_bst.TestBST\" />\n      <item itemvalue=\"Python tests.Python tests for test_avl.TestAVL.test_kth\" />\n      <item itemvalue=\"Python tests.Python tests for test_avl.TestAVL\" />\n      <item itemvalue=\"Python tests.Python tests for test_avl.TestAVL.test_run_through\" />\n    </list>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Python tests.Python tests in test_avl.py\" />\n        <item itemvalue=\"Python tests.Python tests for test_avl.TestAVL\" />\n        <item itemvalue=\"Python tests.Python tests for test_avl.TestAVL.test_kth\" />\n        <item itemvalue=\"Python tests.Python tests for test_avl.TestAVL.test_run_through\" />\n        <item itemvalue=\"Python tests.Python tests for test_bst.TestBST\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"c9235d66-4685-4555-8942-3ddc664d8a52\" name=\"Changes\" comment=\"\" />\n      <created>1652575052156</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1652575052156</updated>\n      <workItem from=\"1652951553434\" duration=\"1749000\" />\n      <workItem from=\"1653527940015\" duration=\"482000\" />\n      <workItem from=\"1653613126225\" duration=\"2029000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Testing\">\n      <created>1652575513599</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652575513599</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Testing\">\n      <created>1652575540543</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652575540543</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Testing\">\n      <created>1652688030501</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652688030502</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Prime Number\">\n      <created>1652691423808</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652691423808</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"good hash and bad hash\">\n      <created>1652788250484</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652788250484</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"hash method\">\n      <created>1652798018102</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652798018102</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"updated code\">\n      <created>1652844521626</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652844521626</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"updated code\">\n      <created>1652845993286</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1652845993286</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"added left rotation and right rotation to avl.py file.\">\n      <created>1653528367049</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653528367049</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"kth largest\">\n      <created>1653544424764</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653544424765</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"finished all avl section\">\n      <created>1653572203187</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653572203187</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"set_total_potion_data and add_potions_to_inventory\">\n      <created>1653652015757</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1653652015757</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"13\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"Testing\" />\n    <MESSAGE value=\"Prime Number\" />\n    <MESSAGE value=\"good hash and bad hash\" />\n    <MESSAGE value=\"hash method\" />\n    <MESSAGE value=\"updated code\" />\n    <MESSAGE value=\"added left rotation and right rotation to avl.py file.\" />\n    <MESSAGE value=\"kth largest\" />\n    <MESSAGE value=\"finished all avl section\" />\n    <MESSAGE value=\"set_total_potion_data and add_potions_to_inventory\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"set_total_potion_data and add_potions_to_inventory\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 1c906f14384830e21111f3a46065cbbadc143d98)
++++ b/.idea/workspace.xml	(date 1653711858039)
+@@ -4,15 +4,22 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="set_total_potion_data and add_potions_to_inventory">
++    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="added left rotation and right rotation to avl.py file.">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/random_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/random_gen.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Python Script" />
++      </list>
++    </option>
++  </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+@@ -34,7 +41,7 @@
+     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+   </component>
+-  <component name="RunManager" selected="Python tests.Python tests in test_avl.py">
++  <component name="RunManager" selected="Python.random_gen">
+     <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+       <module name="base" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+@@ -57,95 +64,83 @@
+       <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="Python tests for test_avl.TestAVL" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
++    <configuration name="hash_table" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="base" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+-      <option name="SDK_HOME" value="" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="/usr/bin/python3" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
++      <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="_new_additionalArguments" value="&quot;&quot;" />
+-      <option name="_new_target" value="&quot;test_avl.TestAVL&quot;" />
+-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/hash_table.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="Python tests for test_avl.TestAVL.test_kth" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
++    <configuration name="primes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="base" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="_new_additionalArguments" value="&quot;&quot;" />
+-      <option name="_new_target" value="&quot;test_avl.TestAVL.test_kth&quot;" />
+-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+-      <method v="2" />
+-    </configuration>
+-    <configuration name="Python tests for test_avl.TestAVL.test_run_through" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+-      <module name="base" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
+       <option name="SDK_HOME" value="" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <option name="IS_MODULE_SDK" value="true" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="_new_additionalArguments" value="&quot;&quot;" />
+-      <option name="_new_target" value="&quot;test_avl.TestAVL.test_run_through&quot;" />
+-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/primes.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+-    <configuration name="Python tests for test_bst.TestBST" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
++    <configuration name="random_gen" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+       <module name="base" />
+       <option name="INTERPRETER_OPTIONS" value="" />
+       <option name="PARENT_ENVS" value="true" />
+-      <option name="SDK_HOME" value="" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="/usr/bin/python3" />
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
++      <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+       <option name="ADD_SOURCE_ROOTS" value="true" />
+       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+-      <option name="_new_additionalArguments" value="&quot;&quot;" />
+-      <option name="_new_target" value="&quot;test_bst.TestBST&quot;" />
+-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+-      <method v="2" />
+-    </configuration>
+-    <configuration name="Python tests in test_avl.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+-      <module name="base" />
+-      <option name="INTERPRETER_OPTIONS" value="" />
+-      <option name="PARENT_ENVS" value="true" />
+-      <option name="SDK_HOME" value="" />
+-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+-      <option name="IS_MODULE_SDK" value="true" />
+-      <option name="ADD_CONTENT_ROOTS" value="true" />
+-      <option name="ADD_SOURCE_ROOTS" value="true" />
+-      <option name="_new_additionalArguments" value="&quot;&quot;" />
+-      <option name="_new_target" value="&quot;$PROJECT_DIR$/test_avl.py&quot;" />
+-      <option name="_new_targetType" value="&quot;PATH&quot;" />
++      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/random_gen.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <option name="MODULE_MODE" value="false" />
++      <option name="REDIRECT_INPUT" value="false" />
++      <option name="INPUT_FILE" value="" />
+       <method v="2" />
+     </configuration>
+     <list>
+       <item itemvalue="Python.Unnamed" />
+-      <item itemvalue="Python tests.Python tests in test_avl.py" />
+-      <item itemvalue="Python tests.Python tests for test_bst.TestBST" />
+-      <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_kth" />
+-      <item itemvalue="Python tests.Python tests for test_avl.TestAVL" />
+-      <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_run_through" />
++      <item itemvalue="Python.primes" />
++      <item itemvalue="Python.hash_table" />
++      <item itemvalue="Python.random_gen" />
+     </list>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Python tests.Python tests in test_avl.py" />
+-        <item itemvalue="Python tests.Python tests for test_avl.TestAVL" />
+-        <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_kth" />
+-        <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_run_through" />
+-        <item itemvalue="Python tests.Python tests for test_bst.TestBST" />
++        <item itemvalue="Python.random_gen" />
++        <item itemvalue="Python.hash_table" />
++        <item itemvalue="Python.primes" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -159,7 +154,6 @@
+       <updated>1652575052156</updated>
+       <workItem from="1652951553434" duration="1749000" />
+       <workItem from="1653527940015" duration="482000" />
+-      <workItem from="1653613126225" duration="2029000" />
+     </task>
+     <task id="LOCAL-00001" summary="Testing">
+       <created>1652575513599</created>
+@@ -224,28 +218,7 @@
+       <option name="project" value="LOCAL" />
+       <updated>1653528367049</updated>
+     </task>
+-    <task id="LOCAL-00010" summary="kth largest">
+-      <created>1653544424764</created>
+-      <option name="number" value="00010" />
+-      <option name="presentableId" value="LOCAL-00010" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1653544424765</updated>
+-    </task>
+-    <task id="LOCAL-00011" summary="finished all avl section">
+-      <created>1653572203187</created>
+-      <option name="number" value="00011" />
+-      <option name="presentableId" value="LOCAL-00011" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1653572203187</updated>
+-    </task>
+-    <task id="LOCAL-00012" summary="set_total_potion_data and add_potions_to_inventory">
+-      <created>1653652015757</created>
+-      <option name="number" value="00012" />
+-      <option name="presentableId" value="LOCAL-00012" />
+-      <option name="project" value="LOCAL" />
+-      <updated>1653652015757</updated>
+-    </task>
+-    <option name="localTasksCounter" value="13" />
++    <option name="localTasksCounter" value="10" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -269,9 +242,29 @@
+     <MESSAGE value="hash method" />
+     <MESSAGE value="updated code" />
+     <MESSAGE value="added left rotation and right rotation to avl.py file." />
+-    <MESSAGE value="kth largest" />
+-    <MESSAGE value="finished all avl section" />
+-    <MESSAGE value="set_total_potion_data and add_potions_to_inventory" />
+-    <option name="LAST_COMMIT_MESSAGE" value="set_total_potion_data and add_potions_to_inventory" />
++    <option name="LAST_COMMIT_MESSAGE" value="added left rotation and right rotation to avl.py file." />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints>
++        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
++          <url>file://$PROJECT_DIR$/random_gen.py</url>
++          <line>37</line>
++          <option name="timeStamp" value="6" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
++          <url>file://$PROJECT_DIR$/random_gen.py</url>
++          <line>19</line>
++          <option name="timeStamp" value="7" />
++        </line-breakpoint>
++      </breakpoints>
++    </breakpoint-manager>
++  </component>
++  <component name="com.intellij.coverage.CoverageDataManagerImpl">
++    <SUITE FILE_PATH="coverage/The_Potion_Seller$primes.coverage" NAME="primes Coverage Results" MODIFIED="1652845912141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/The_Potion_Seller$random_gen.coverage" NAME="random_gen Coverage Results" MODIFIED="1653711792759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/The_Potion_Seller$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1652843333804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/The_Potion_Seller$test_primes.coverage" NAME="test_primes Coverage Results" MODIFIED="1652593740739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
++    <SUITE FILE_PATH="coverage/The_Potion_Seller$hash_table.coverage" NAME="hash_table Coverage Results" MODIFIED="1652951575047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+   </component>
+ </project>
+\ No newline at end of file

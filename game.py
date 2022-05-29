@@ -71,4 +71,19 @@ class Game:
         return output
 
     def solve_game(self, potion_valuations: list[tuple[str, float]], starting_money: list[int]) -> list[float]:
-        raise NotImplementedError()
+        # List out original cost of the post in the list.
+        # Find combinations of potions you can buy with the starting money.
+        # Calculation respective profit for each combination and then return the maximum amount.
+        # equal size
+        list = [15, 25, 40, 35]
+        money = 170
+        list_profit = [20, 40, 60, 60]
+
+    def find_the_index_of_max_profit_potion(self, list1, list2) -> int:
+        # list 1 has to be original value, list 2 is vendor price
+        profit_list = []
+        if len(list1) == len(list2):
+            for i in range(0, len(list1)):
+                profit_list.append(list2[i] - list1[i])
+        return profit_list.index(max(profit_list))
+    # profit_list.remove(profit_list[index])
