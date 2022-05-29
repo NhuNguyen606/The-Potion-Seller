@@ -1,27 +1,43 @@
+""" Game Class Implementation.
+
+Defines the Game class used to play the game.
+"""
+
+__author__ = "Behnam Mozafari, Zhongxun Pan, Nhu Nguyen"
+
 from __future__ import annotations
 # ^ In case you aren't on Python 3.10
 from avl import AVLTree
 from hash_table import LinearProbePotionTable
 from potion import Potion
 from random_gen import RandomGen
+from array_sorted_list import ArraySortedList
 
 
 class Game:
     """
-
+    A hash table is used within the class to hold the total potion data, as each potion has a unique name that can be
+    used as a key. Further, the hash table allows for constant time accessing, thus resulting in the fastest way to
+    access potion data given the name
+    An AVL tree is used for the inventory of vendors, as the prices of potions are unique, thus can be used as keys.
+    Further, the AVL tree allows for log(N) time to find the kth largest element,
+    thus reducing the choose_potions_for_vendors method's complexity
+    A sorted list is used to hold the potion valuation information in the solve_game function, as it was needed to sort
+    the potions based on a profit ratio and the sorted list allows for constant time to access its largest element if
+    the length is known.
     """
+
     def __init__(self, seed=0) -> None:
         self.rand = RandomGen(seed=seed)
         self.total_potions = None
         self.inventory = None
-        self.game_potions = None
 
     def set_total_potion_data(self, potion_data: list) -> None:
         """
         Creates hash table to store all possible potions, sets inventory of vendors to contain 0 of each potion
         Args:
             potion_data: List containing all possible potions
-        :complexity: O(N*log(N)), where N is the length of potion_data
+        :complexity: worst case: O(N*log(N)), where N is the length of potion_data
         """
         self.total_potions = LinearProbePotionTable(len(potion_data))
         self.inventory = AVLTree()
@@ -73,53 +89,50 @@ class Game:
 
     def solve_game(self, potion_valuations: list[tuple[str, float]], starting_money: list[int]) -> list[float]:
         """
-        Optimally purchases potions from vendors to maximise profits
+        Plays game. Optimally purchases potions from vendors to maximise profits
         Args:
             potion_valuations: list of potions that each vendor is selling, paired with its valuation by the adventurers
             starting_money: is a list containing, for each attempt, the starting allowance the player has
-        :complexity:
+        :complexity: worst case: O(N*log(N) + M*N), Where N is the length of potion_valuations, and M is the length of
+        starting_money. This is because the method contains a loop which iterates over all items in potion_valuations
+        (N times), and for each item, performs a get function from an AVL and adds to a sorted list, taking log(N) time,
+        thus the first loop has time complexity of O(N*log(N). The second loop iterates over all items in starting_money
+        taking M time, and contains a nested loop which has a worst case of iterating over all items in
+        potion_valuations, thus taking N time, thus the second loop has a complexity of O(M*N), giving a total
+        complexity of O(N*log(N) + M*N).
         """
-        self.game_potions = AVLTree()
         num_potions = len(potion_valuations)
-        # Finds profit for each potion
-        potion_profits = LinearProbePotionTable(num_potions)
+        game_potions = ArraySortedList(num_potions)
+        # Finds profit for each potion, adding to sorted list
         for i in potion_valuations:
             buy_price = self.total_potions[i[0]][1]
-            profit = i[1] - buy_price
-            if profit > 0:
+            profit_ratio = i[1] / buy_price
+            if profit_ratio > 1:
                 potion_litres = self.inventory[buy_price][1]
-                profit_str = str(profit)
-                if profit_str in potion_profits:
-                    potion_profits[profit_str] = potion_profits[profit_str]+1
-                else:
-                    potion_profits[profit_str] = 0
-                self.game_potions[profit*num_potions + potion_profits[profit_str]] = (i[0], buy_price, potion_litres, profit)
+                game_potions.add((profit_ratio, buy_price, potion_litres))
 
         output = []
 
+        # keeps on buying and selling most profitable potion
         for j in starting_money:
-            total_profit = j
-            deleted_potions = []
+            total_profit = 0
+            k = len(game_potions) - 1
             while j > 0:
-                most_profit = self.game_potions.kth_largest(1)
-                profit = most_profit.item[3]
-                name = most_profit.item[0]
-                buying_price = most_profit.item[1]
-                litres = most_profit.item[2]
-                # If we can buy all the stock of the most profitable potion
+                current = game_potions[k]
+                profit_ratio = current[0]
+                buying_price = current[1]
+                litres = current[2]
+                # If we can buy all the stock of the most profitable potion, buy it all
                 if litres * buying_price <= j:
-                    total_profit += profit * litres
-                    deleted_potions.append((most_profit.key, name, buying_price, litres, profit))
-                    del self.game_potions[most_profit.key]
+                    total_profit += profit_ratio * buying_price * litres
                     j -= litres * buying_price
                 # We have to buy a certain amount of the most profitable potion
                 else:
                     # calculate amount we can buy
                     num_litres = j / buying_price
-                    total_profit += num_litres * profit
+                    total_profit += profit_ratio * buying_price * num_litres
                     j -= num_litres * buying_price
+                k -= 1
             output.append(total_profit)
-            for k in deleted_potions:
-                self.game_potions[k[0]] = (k[1], k[2], k[3], k[4])
 
         return output

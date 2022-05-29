@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="edit set_total_potion_data and add_potions_to_inventory">
-      <change beforePath="$PROJECT_DIR$/.idea/base.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/base.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c9235d66-4685-4555-8942-3ddc664d8a52" name="Changes" comment="finish solve game">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hash_table.py" beforeDir="false" afterPath="$PROJECT_DIR$/hash_table.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/avl.py" beforeDir="false" afterPath="$PROJECT_DIR$/avl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/potion.py" beforeDir="false" afterPath="$PROJECT_DIR$/potion.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/primes.py" beforeDir="false" afterPath="$PROJECT_DIR$/primes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +37,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for test_game.TestGame.test_example">
+  <component name="RunManager" selected="Python.test_avl">
     <configuration name="Unnamed" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="base" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -62,19 +60,26 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_avl.TestAVL" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="test_avl" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="base" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_avl.TestAVL&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test_avl.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Python tests for test_avl.TestAVL.test_kth" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
@@ -92,7 +97,7 @@
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_avl.TestAVL.test_run_through" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for test_game.TestGame" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="base" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -103,7 +108,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_avl.TestAVL.test_run_through&quot;" />
+      <option name="_new_target" value="&quot;test_game.TestGame&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
@@ -139,19 +144,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.Unnamed" />
-      <item itemvalue="Python tests.Python tests for test_avl.TestAVL" />
       <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_kth" />
-      <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_run_through" />
       <item itemvalue="Python tests.Python tests for test_game.TestGame.test_choose_vendors" />
       <item itemvalue="Python tests.Python tests for test_game.TestGame.test_example" />
+      <item itemvalue="Python tests.Python tests for test_game.TestGame" />
+      <item itemvalue="Python.test_avl" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_game.TestGame.test_example" />
+        <item itemvalue="Python.test_avl" />
         <item itemvalue="Python tests.Python tests for test_game.TestGame.test_choose_vendors" />
+        <item itemvalue="Python tests.Python tests for test_game.TestGame.test_example" />
+        <item itemvalue="Python tests.Python tests for test_game.TestGame" />
         <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_kth" />
-        <item itemvalue="Python tests.Python tests for test_avl.TestAVL" />
-        <item itemvalue="Python tests.Python tests for test_avl.TestAVL.test_run_through" />
       </list>
     </recent_temporary>
   </component>
@@ -165,7 +170,7 @@
       <updated>1652575052156</updated>
       <workItem from="1652951553434" duration="1749000" />
       <workItem from="1653527940015" duration="482000" />
-      <workItem from="1653613126225" duration="21961000" />
+      <workItem from="1653613126225" duration="27195000" />
     </task>
     <task id="LOCAL-00001" summary="Testing">
       <created>1652575513599</created>
@@ -286,7 +291,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653717151962</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="finish solve game">
+      <created>1653823481309</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1653823481309</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,17 +327,16 @@
     <MESSAGE value="added analysis" />
     <MESSAGE value="finished choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
     <MESSAGE value="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished debugging choose_potions_for_vendors, add_potions_to_inventory, set_total_potion_data" />
+    <MESSAGE value="finish solve game" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish solve game" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/game.py</url>
-          <line>97</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/The_Potion_Seller$primes.coverage" NAME="primes Coverage Results" MODIFIED="1652845912141" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/The_Potion_Seller$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1652843333804" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A3___The_Potion_Seller$hash_table.coverage" NAME="hash_table Coverage Results" MODIFIED="1653457635172" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/The_Potion_Seller$random_gen.coverage" NAME="random_gen Coverage Results" MODIFIED="1653711792759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/The_Potion_Seller$test_primes.coverage" NAME="test_primes Coverage Results" MODIFIED="1652593740739" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/The_Potion_Seller$hash_table.coverage" NAME="hash_table Coverage Results" MODIFIED="1652951575047" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/A3___The_Potion_Seller$.coverage" NAME=" Coverage Results" MODIFIED="1653828463984" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

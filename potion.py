@@ -1,6 +1,7 @@
 """ Potion class
     Keep track of potion of the game and create potion objects
 """
+
 class Potion:
     
     def __init__(self, potion_type: str, name: str, buy_price: float, quantity: float) -> None:

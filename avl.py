@@ -29,7 +29,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         """
             Get the height of a node. Return current.height if current is 
             not None. Otherwise, return 0.
-            :complexity: O(1)
+            :complexity: worst case: O(1)
         """
 
         if current is not None:
@@ -40,7 +40,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         """
         Get the length of the subtree with current as its root
         :param current: root of subtree
-        :complexity: O(1)
+        :complexity: worst case: O(1)
         """
 
         if current is not None:
@@ -51,7 +51,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         """
             Compute the balance factor for the current sub-tree as the value
             (right.height - left.height). If current is None, return 0.
-            :complexity: O(1)
+            :complexity: worst case: O(1)
         """
 
         if current is None:
@@ -64,6 +64,9 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             it. After insertion, performs sub-tree rotation whenever it becomes
             unbalanced.
             returns the new root of the subtree.
+            :param key: key of item
+            :param current: current node
+            :complexity: worst case: O(log(N)), where N is the number of nodes in the tree
         """
 
         if current is None:  # base case: at the leaf
@@ -95,6 +98,9 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             determine the node to delete. After deletion,
             performs sub-tree rotation whenever it becomes unbalanced.
             returns the new root of the subtree.
+            :param key: key of item
+            :param current: current node
+            :complexity: worst case: O(log(N)), where N is the number of nodes in the tree
         """
 
         if current is None:  # key not found
@@ -150,7 +156,8 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
                       /     \                           /     \
                  center     r-tree                 l-tree     center
 
-            :complexity: O(1)
+            :param current: current node to be rotated left
+            :complexity: worst case: O(1)
         """
 
         child = current.right
@@ -183,7 +190,8 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
                  /     \                                           /     \
             l-tree     center                                 center     r-tree
 
-            :complexity: O(1)
+            :param current: current node to be rotated right
+            :complexity: worst case: O(1)
         """
 
         child = current.left
@@ -211,6 +219,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
             - a combination of left + right rotate
             - a combination of right + left rotate
             returns the new root of the subtree.
+            :complexity: worst case: O(1)
         """
         if self.get_balance(current) >= 2:
             child = current.right
@@ -244,7 +253,7 @@ class AVLTree(BinarySearchTree, Generic[K, I]):
         Finds the kth largest element
         :param current: current node
         :param k: Kth largest element to find
-        :complexity: worst case: O(log(N)), where N is the total number of nodes in the tree
+        :complexity: worst case: O(log(N)), where N is the total number of nodes in the subtree with current as its root
         """
         right_length = self.get_sub_length(current.right)
         # Search right of tree if >= k nodes in right of tree
