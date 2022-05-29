@@ -21,10 +21,7 @@ def lcg(modulus: int, a: int, c: int, seed: int) -> Generator[int, None, None]:
 class RandomGen:
 
     def __init__(self, seed: int = 0) -> None:
-        self.modulus = pow(randrange(10), randrange(50))
-        self.a = 134775813
-        self.c = 1
-        self.seed = seed
+        self.random_nums = lcg(pow(2, 32), 134775813, 1, seed)
 
     def randint(self, k: int) -> int:
         """
@@ -33,23 +30,23 @@ class RandomGen:
             k: inclusive upper bound for rand number
         :complexity: O(1)
         """
-        random_generator = lcg(self.modulus, self.a, self.c, self.seed)
-        count = 0
         temp_list = []
-        for number in random_generator:
-            temp_list.append(format(number, "b")[0:16])
-            count += 1
-            if count >= 6:
-                break
-        temp_list.pop(0)
-        res = 0
-        for _ in temp_list:
-            res += int(_)
-        output = ""
-        for _ in str(res):
-            if int(_) >= 3:
-                output += "1"
+        for number in self.random_nums:
+            binary_num = bin(number)
+            adjusted_num = int(binary_num[2:])
+            if len(binary_num) > 3:
+                adjusted_num = int(binary_num[2:len(binary_num) - 16])
+
+            temp_list.append(adjusted_num)
+
+        total = str(sum(temp_list)).zfill(16)
+        random_num = ""
+        for x in total:
+            if int(x) > 2:
+                random_num += "1"
             else:
-                output += "0"
-        final_generated_random_number = int(output, 2)
-        return final_generated_random_number % k + 1
+                random_num += "0"
+
+        return int(random_num, 2) % k + 1
+
+
