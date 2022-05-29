@@ -14,6 +14,7 @@ class Game:
         self.rand = RandomGen(seed=seed)
         self.total_potions = None
         self.inventory = None
+        self.game_potions = None
 
     def set_total_potion_data(self, potion_data: list) -> None:
         """
@@ -71,19 +72,54 @@ class Game:
         return output
 
     def solve_game(self, potion_valuations: list[tuple[str, float]], starting_money: list[int]) -> list[float]:
-        # List out original cost of the post in the list.
-        # Find combinations of potions you can buy with the starting money.
-        # Calculation respective profit for each combination and then return the maximum amount.
-        # equal size
-        list = [15, 25, 40, 35]
-        money = 170
-        list_profit = [20, 40, 60, 60]
+        """
+        Optimally purchases potions from vendors to maximise profits
+        Args:
+            potion_valuations: list of potions that each vendor is selling, paired with its valuation by the adventurers
+            starting_money: is a list containing, for each attempt, the starting allowance the player has
+        :complexity:
+        """
+        self.game_potions = AVLTree()
+        num_potions = len(potion_valuations)
+        # Finds profit for each potion
+        potion_profits = LinearProbePotionTable(num_potions)
+        for i in potion_valuations:
+            buy_price = self.total_potions[i[0]][1]
+            profit = i[1] - buy_price
+            if profit > 0:
+                potion_litres = self.inventory[buy_price][1]
+                profit_str = str(profit)
+                if profit_str in potion_profits:
+                    potion_profits[profit_str] = potion_profits[profit_str]+1
+                else:
+                    potion_profits[profit_str] = 0
+                self.game_potions[profit*num_potions + potion_profits[profit_str]] = (i[0], buy_price, potion_litres, profit)
 
-    def find_the_index_of_max_profit_potion(self, list1, list2) -> int:
-        # list 1 has to be original value, list 2 is vendor price
-        profit_list = []
-        if len(list1) == len(list2):
-            for i in range(0, len(list1)):
-                profit_list.append(list2[i] - list1[i])
-        return profit_list.index(max(profit_list))
-    # profit_list.remove(profit_list[index])
+        output = []
+
+        for j in starting_money:
+            total_profit = j
+            deleted_potions = []
+            while j > 0:
+                most_profit = self.game_potions.kth_largest(1)
+                profit = most_profit.item[3]
+                name = most_profit.item[0]
+                buying_price = most_profit.item[1]
+                litres = most_profit.item[2]
+                # If we can buy all the stock of the most profitable potion
+                if litres * buying_price <= j:
+                    total_profit += profit * litres
+                    deleted_potions.append((most_profit.key, name, buying_price, litres, profit))
+                    del self.game_potions[most_profit.key]
+                    j -= litres * buying_price
+                # We have to buy a certain amount of the most profitable potion
+                else:
+                    # calculate amount we can buy
+                    num_litres = j / buying_price
+                    total_profit += num_litres * profit
+                    j -= num_litres * buying_price
+            output.append(total_profit)
+            for k in deleted_potions:
+                self.game_potions[k[0]] = (k[1], k[2], k[3], k[4])
+
+        return output
