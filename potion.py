@@ -1,11 +1,13 @@
 """ Potion class
-    Keep track of potion of the game and create potion objects
+
+Keeps track of potion of the game and creates potion objects
 """
 
 __author__ = "Behnam Mozafari, Nhu Nguyen"
 
+
 class Potion:
-    
+
     def __init__(self, potion_type: str, name: str, buy_price: float, quantity: float) -> None:
         """
         Constructor to initialise values
@@ -21,7 +23,6 @@ class Potion:
         self.buy_price = buy_price
         self.quantity = quantity
 
-
     @classmethod
     def create_empty(cls, potion_type: str, name: str, buy_price: float) -> 'Potion':
         """
@@ -34,8 +35,7 @@ class Potion:
         Returns: creates combinations of potion with 0 quantity but different potion_type, name and buy price
         :complexity: O(1)
         """
-        return Potion(potion_type, name, buy_price,  0)
-
+        return Potion(potion_type, name, buy_price, 0)
 
     @classmethod
     def good_hash(cls, potion_name: str, tablesize: int) -> int:
@@ -60,7 +60,6 @@ class Potion:
             a = a * b % (tablesize - 1)
         return value
 
-
     @classmethod
     def bad_hash(cls, potion_name: str, tablesize: int) -> int:
         """
@@ -75,11 +74,3 @@ class Potion:
         :complexity: O(1)
         """
         return ord(potion_name[0]) % tablesize
-
-
-
-
-
-
-
-

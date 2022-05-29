@@ -3,9 +3,10 @@
 Defines the Game class used to play the game.
 """
 
+from __future__ import annotations
+
 __author__ = "Behnam Mozafari, Zhongxun Pan, Nhu Nguyen"
 
-from __future__ import annotations
 # ^ In case you aren't on Python 3.10
 from avl import AVLTree
 from hash_table import LinearProbePotionTable

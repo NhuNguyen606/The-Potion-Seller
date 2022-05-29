@@ -3,7 +3,7 @@
 Defines the RandomGen class used to generate random numbers given a seed.
 """
 
-__author__ = "Zhongxun Pan"
+__author__ = "Behnam Mozafari, Zhongxun Pan"
 
 from typing import Generator
 from random import randrange
