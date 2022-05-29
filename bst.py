@@ -26,19 +26,24 @@ class BSTInOrderIterator:
     """
 
     def __init__(self, root: TreeNode[K, I]) -> None:
-        """ Iterator initialiser. """
+        """ Iterator initialiser.
+         :complexity:  O(1)
+         """
 
         self.stack = LinkedStack()
         self.current = root
 
     def __iter__(self) -> BSTInOrderIterator:
-        """ Standard __iter__() method for initialisers. Returns itself. """
+        """ Standard __iter__() method for initialisers. Returns itself.
+        :complexity: O(1)
+         """
 
         return self
 
     def __next__(self) -> K:
         """ The main body of the iterator.
             Returns keys of the BST one by one respecting the in-order.
+            :complexity: O(N)
         """
 
         while self.current:
@@ -78,7 +83,9 @@ class BinarySearchTree(Generic[K, I]):
         return self.root is None
 
     def __len__(self) -> int:
-        """ Returns the number of nodes in the tree. """
+        """ Returns the number of nodes in the tree.
+            :complexity: O(1)
+        """
 
         return self.length
 
@@ -95,7 +102,9 @@ class BinarySearchTree(Generic[K, I]):
             return True
 
     def __iter__(self) -> BSTInOrderIterator:
-        """ Create an in-order iterator. """
+        """ Create an in-order iterator.
+            :complexity: O(1)
+        """
         return BSTInOrderIterator(self.root)
 
     def __getitem__(self, key: K) -> I:
@@ -108,9 +117,21 @@ class BinarySearchTree(Generic[K, I]):
         return self.get_tree_node_by_key(key).item
 
     def get_tree_node_by_key(self, key: K) -> TreeNode:
+        """"
+        See get_tree_node_by_key_aux
+        best-case: O(log(N))
+        worse-case: O(N)
+        """
         return self.get_tree_node_by_key_aux(self.root, key)
 
     def get_tree_node_by_key_aux(self, current: TreeNode, key: K) -> TreeNode:
+        """
+        Search the needed node in the tree by traversing it logically
+        :param current: current node
+        :param key: given key
+        :return: return data of the node from the given key
+        :complexity: O(N)
+        """
         if current is None:  # base case: empty
             raise KeyError('Key not found: {0}'.format(key))
         elif key == current.key:  # base case: found
@@ -121,6 +142,13 @@ class BinarySearchTree(Generic[K, I]):
             return self.get_tree_node_by_key_aux(current.right, key)
 
     def getitem_aux(self, current: TreeNode, key: K) -> I:
+        """
+        Search the needed node in the tree by traversing it logically
+        :param current: current node
+        :param key: given key
+        :return: return data of the node from the given key
+        :complexity: O(N)
+        """
         if current is None:  # base case: empty
             raise KeyError('Key not found: {0}'.format(key))
         elif key == current.key:  # base case: found
@@ -131,6 +159,12 @@ class BinarySearchTree(Generic[K, I]):
             return self.getitem_aux(current.right, key)
 
     def __setitem__(self, key: K, item: I) -> None:
+        """"
+        Insert new node into the tree
+        :param key: given key
+        :param item: data to be stored
+        :complexity: best-case: O(log(N)), worse-case: O(N)
+        """
         self.root = self.insert_aux(self.root, key, item)
 
     def insert_aux(self, current: TreeNode, key: K, item: I) -> TreeNode:
@@ -153,18 +187,26 @@ class BinarySearchTree(Generic[K, I]):
         return current
 
     def __delitem__(self, key: K) -> None:
+        """
+        Delete the node by the given key in the tree
+        :param key: given key
+        :return:
+        :complexity: O(1)
+        """
         self.root = self.delete_aux(self.root, key)
 
     def delete_aux(self, current: TreeNode, key: K) -> TreeNode:
         """
-            Attempts to delete an item from the tree, it uses the Key to
-            determine the node to delete.
+        Attempts to delete an item from the tree, it uses the Key to determine the node to delete.
+        :param key: given key
+        :return:
+        :complexity: O(1)
         """
 
         if current is None:  # key not found
             raise ValueError('Deleting non-existent item')
         elif key < current.key:
-            current.left  = self.delete_aux(current.left, key)
+            current.left = self.delete_aux(current.left, key)
         elif key > current.key:
             current.right = self.delete_aux(current.right, key)
         else:  # we found our key => do actual deletion
@@ -191,6 +233,7 @@ class BinarySearchTree(Generic[K, I]):
             Get successor of the current node.
             It should be a child node having the smallest key among all the
             larger keys.
+            :complexity: best-case: O(log(N)), worse-case: O(N)
         """
         if current.right is not None:
             return self.get_minimal(current.right)
@@ -200,6 +243,7 @@ class BinarySearchTree(Generic[K, I]):
     def get_minimal(self, current: TreeNode) -> TreeNode:
         """
             Get a node having the smallest key in the current sub-tree.
+            :complexity: best-case: O(log(N)), worse-case: O(N)
         """
         while current.left is not None:
             current = current.left
@@ -207,18 +251,27 @@ class BinarySearchTree(Generic[K, I]):
 
 
     def is_leaf(self, current: TreeNode) -> bool:
-        """ Simple check whether or not the node is a leaf. """
+        """
+        Simple check whether or not the node is a leaf.
+        :complexity: O(1)
+         """
 
         return current.left is None and current.right is None
 
     def draw(self, to=sys.stdout):
-        """ Draw the tree in the terminal. """
+        """
+        Draw the tree in the terminal.
+        :complexity:O(N)
+         """
 
         # get the nodes of the graph to draw recursively
         self.draw_aux(self.root, prefix='', final='', to=to)
 
     def draw_aux(self, current: TreeNode, prefix='', final='', to=sys.stdout) -> K:
-        """ Draw a node and then its children. """
+        """
+        Draw a node and then its children
+        :complexity: O(N)
+        """
 
         if current is not None:
             real_prefix = prefix[:-2] + final
