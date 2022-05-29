@@ -1,8 +1,18 @@
+""" RandomGen Class Implementation.
+
+Defines the RandomGen class used to generate random numbers given a seed.
+"""
+
+__author__ = "Zhongxun Pan"
+
 from typing import Generator
 from random import randrange
 
+
 def lcg(modulus: int, a: int, c: int, seed: int) -> Generator[int, None, None]:
-    """Linear congruential generator."""
+    """Linear congruential generator.
+    :complexity: worst case: O(1)
+    """
     while True:
         seed = (a * seed + c) % modulus
         yield seed
@@ -17,6 +27,12 @@ class RandomGen:
         self.seed = seed
 
     def randint(self, k: int) -> int:
+        """
+        Generates a random number from 1 to k inclusive
+        Args:
+            k: inclusive upper bound for rand number
+        :complexity: O(1)
+        """
         random_generator = lcg(self.modulus, self.a, self.c, self.seed)
         count = 0
         temp_list = []

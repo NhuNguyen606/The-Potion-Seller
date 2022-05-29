@@ -2,6 +2,8 @@
     Keep track of potion of the game and create potion objects
 """
 
+__author__ = "Behnam Mozafari, Nhu Nguyen"
+
 class Potion:
     
     def __init__(self, potion_type: str, name: str, buy_price: float, quantity: float) -> None:
